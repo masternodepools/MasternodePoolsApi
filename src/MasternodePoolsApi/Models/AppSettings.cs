@@ -1,4 +1,4 @@
-﻿namespace MasternodePoolsApi.Helpers
+﻿namespace MasternodePoolsApi.Models
 {
     public class AppSettings
     {

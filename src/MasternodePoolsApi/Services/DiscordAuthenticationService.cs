@@ -1,5 +1,4 @@
-﻿using MasternodePoolsApi.Helpers;
-using MasternodePoolsApi.Models;
+﻿using MasternodePoolsApi.Models;
 using MasternodePoolsApi.Services.Abstraction;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;

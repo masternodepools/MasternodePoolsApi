@@ -1,4 +1,5 @@
-﻿using MasternodePoolsApi.Services;
+﻿using MasternodePoolsApi.Attributes;
+using MasternodePoolsApi.Services;
 using MasternodePoolsApi.Services.Abstraction;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;
 using System;
 
-namespace MasternodePoolsApi.Services
+namespace MasternodePoolsApi.Attributes
 {
     public class DiscordAuthorizeAttribute :  Attribute, IAuthorizationFilter
     {
