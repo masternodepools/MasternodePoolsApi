@@ -1,0 +1,3 @@
+# MasternodePoolsApi
+
+Work in progress...
