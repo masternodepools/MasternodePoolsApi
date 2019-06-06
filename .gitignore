@@ -328,3 +328,5 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+/src/MasternodePoolsApi/appsettings.json
+/src/MasternodePoolsApi/appsettings.Development.json
