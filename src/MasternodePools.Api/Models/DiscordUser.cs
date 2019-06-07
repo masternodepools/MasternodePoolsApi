@@ -20,6 +20,7 @@ namespace MasternodePools.Api.Models
         [JsonProperty("discriminator")]
         public string Discriminator { get; set; }
 
+        [JsonProperty("nametag")]
         public string NameTag
         {
             get

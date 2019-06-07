@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MasternodePools.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("auth")]
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
@@ -43,7 +43,7 @@ namespace MasternodePools.Api.Controllers
                 await CreateDiscordUserAsync(discordUser);
             }
 
-            return Ok();
+            return Redirect("http://mnpools.eu");
         }
 
         [HttpGet("me")]

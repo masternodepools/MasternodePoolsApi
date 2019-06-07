@@ -49,7 +49,7 @@ namespace MasternodePools.Api.Services
                     new KeyValuePair<string, string>("client_secret", _clientSecret),
                     new KeyValuePair<string, string>("grant_type", "authorization_code"),
                     new KeyValuePair<string, string>("code", code),
-                    new KeyValuePair<string, string>("redirect_uri", "https://localhost:44345/api/authentication"),
+                    new KeyValuePair<string, string>("redirect_uri", "http://api.mnpools.eu/auth"),
                     new KeyValuePair<string, string>("scope", "identify")
                 };
 

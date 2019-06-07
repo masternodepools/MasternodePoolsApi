@@ -23,13 +23,17 @@ namespace MasternodePools.Api
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             var appSettingsSection = Configuration.GetSection("AppSettings");
-            services.Configure<AppSettings>(appSettingsSection);
-
             var appSettings = appSettingsSection.Get<AppSettings>();
 
-            services.AddScoped<IDiscordAuthenticationService, DiscordAuthenticationService>();
+            services.Configure<AppSettings>(appSettingsSection);
+            services.AddMasternodeEntities(Configuration);
 
-            services.AddMasternodeEntities(Configuration.GetConnectionString("MasternodePools"));
+            services.AddDynamoDb(Configuration, 
+                appSettings.AWSAccessKey, 
+                appSettings.AWSSecretKey, 
+                appSettings.AWSRegion);
+
+            services.AddScoped<IDiscordAuthenticationService, DiscordAuthenticationService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
