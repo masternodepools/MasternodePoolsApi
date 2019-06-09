@@ -3,7 +3,9 @@ using MasternodePools.Api.Models;
 using MasternodePools.Api.Services.Abstraction;
 using MasternodePools.Data.Entities;
 using MasternodePools.Data.Services.Abstraction;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 
@@ -13,15 +15,18 @@ namespace MasternodePools.Api.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
+        private string _websiteUrl;
         private IDiscordAuthenticationService _discordAuthenticationService;
         private IEntityService<User> _userService;
 
         public AuthenticationController(
+            IOptions<AppSettings> appSettings,
             IDiscordAuthenticationService discordAuthenticationService,
             IEntityService<User> userService)
         {
             _discordAuthenticationService = discordAuthenticationService;
             _userService = userService;
+            _websiteUrl = appSettings.Value.WebsiteUrl;
         }
 
         [HttpGet]
@@ -36,14 +41,17 @@ namespace MasternodePools.Api.Controllers
             var discordUser = await _discordAuthenticationService.GetUserAsync(token);
             var user = await _userService.GetAsync(discordUser.Id);
 
-            Response.Cookies.Append("auth", JsonConvert.SerializeObject(token));
+            Response.Cookies.Append("auth", JsonConvert.SerializeObject(token), new CookieOptions
+            {
+                Domain = ".mnpools.eu",
+            });
 
             if (user == null)
             {
                 await CreateDiscordUserAsync(discordUser);
             }
 
-            return Redirect("http://mnpools.eu");
+            return Redirect(_websiteUrl);
         }
 
         [HttpGet("me")]

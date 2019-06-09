@@ -26,11 +26,28 @@ namespace MasternodePools.Api.Controllers
         {
             var currentUser = (DiscordUser)HttpContext.Items["User"];
             var wallets = await _walletService.GetWalletsAsync(currentUser.Id);
-            return wallets.Select(w => new UserWallet
-            {
-                Coin = w.Coin,
-                Balance = w.Balance
-            });
+            return wallets.Select(ToUserWallet);
         }
+
+        [HttpGet("{coin}")]
+        [DiscordAuthorize]
+        public async Task<UserWallet> GetWallet(string coin)
+        {
+            var currentUser = (DiscordUser)HttpContext.Items["User"];
+            var wallet = await _walletService.GetWalletAsync(currentUser.Id, coin);
+            if (wallet == null)
+            {
+                wallet = await _walletService.CreateWalletAsync(currentUser.Id, coin);
+            }
+            return ToUserWallet(wallet);
+        }
+
+        private UserWallet ToUserWallet(Wallet wallet)
+            => new UserWallet
+            {
+                Coin = wallet.Coin,
+                Balance = wallet.Balance,
+                Address = wallet.Address
+            };
     }
 }

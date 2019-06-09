@@ -8,6 +8,8 @@ namespace MasternodePools.Data.Services.Abstraction
     {
         Task<IList<Wallet>> GetWalletsAsync(string userId);
 
-        Task CreateWalletAsync(string userId, string symbol);
+        Task<Wallet> GetWalletAsync(string userId, string coin);
+
+        Task<Wallet> CreateWalletAsync(string userId, string coin);
     }
 }

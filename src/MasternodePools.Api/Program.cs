@@ -12,6 +12,8 @@ namespace MasternodePools.Api
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+            .UseKestrel()
+            .UseIIS()
             .UseStartup<Startup>();
     }
 }

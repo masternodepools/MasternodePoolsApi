@@ -14,11 +14,13 @@ namespace MasternodePools.Api.Services
         private readonly string _apiEndpoint = "https://discordapp.com/api/v6";
         private readonly string _clientId;
         private readonly string _clientSecret;
+        private readonly string _apiUrl;
 
         public DiscordAuthenticationService(IOptions<AppSettings> appSettings)
         {
             _clientId = appSettings.Value.DiscordClientId;
             _clientSecret = appSettings.Value.DiscordSecret;
+            _apiUrl = appSettings.Value.ApiUrl;
         }
 
         public async Task<DiscordUser> GetUserAsync(Models.Authorization token)
@@ -49,7 +51,7 @@ namespace MasternodePools.Api.Services
                     new KeyValuePair<string, string>("client_secret", _clientSecret),
                     new KeyValuePair<string, string>("grant_type", "authorization_code"),
                     new KeyValuePair<string, string>("code", code),
-                    new KeyValuePair<string, string>("redirect_uri", "http://api.mnpools.eu/auth"),
+                    new KeyValuePair<string, string>("redirect_uri", $"{_apiUrl}/auth"),
                     new KeyValuePair<string, string>("scope", "identify")
                 };
 

@@ -12,7 +12,10 @@ namespace MasternodePools.Data.Entities
         public string Coin { get; set; }
 
         [DynamoDBProperty]
-        public double CreatedAt { get; set; }
+        public long CreatedAt { get; set; }
+
+        [DynamoDBProperty]
+        public string Address { get; set; }
 
         public decimal Balance { get; set; }
     }
